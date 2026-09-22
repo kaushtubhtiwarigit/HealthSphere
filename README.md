@@ -34,7 +34,7 @@ A comprehensive healthcare management system built with Next.js, featuring role-
 ### Authentication
 - Role-based access control (Patient, Doctor, Admin)
 - Secure login and registration
-- Session management with localStorage
+- Session management with MongoDB
 - Demo credentials for testing
 
 ## Demo Credentials
@@ -55,9 +55,9 @@ A comprehensive healthcare management system built with Next.js, featuring role-
 
 - **Frontend**: Next.js 16, React 18, TypeScript
 - **Styling**: Tailwind CSS v4, shadcn/ui components
-- **State Management**: React Context API, localStorage + MongoDB sessions
+- **State Management**: React Context API
 - **AI**: Google Gemini 1.5 Flash API
-- **Database**: MongoDB (with localStorage fallback for some features)
+- **Database**: MongoDB
 - **Charts**: Recharts 2.15.4
 
 ## Project Structure
@@ -99,18 +99,31 @@ lib/
    \`\`\`
 
 2. **Setup environment variables**:
-   Create a `.env` file with:
-   \`\`\`bash
-   MONGODB_URI=mongodb://localhost:27017/hms
+   Create a `.env.local` file with:
+   ```bash
+   MONGODB_URI=mongodb://localhost:27017/healthsphere
    GEMINI_API_KEY=your_gemini_api_key_here
-   \`\`\`
+   ```
+   
+   Copy from example:
+   ```bash
+   cp .env.example .env.local
+   ```
 
-3. **Run the development server**:
-   \`\`\`bash
+3. **Setup MongoDB**:
+   - Install MongoDB locally or use MongoDB Atlas
+   - Run the seed script to populate demo data:
+   ```bash
+   npm run seed
+   ```
+   This creates demo users, medical records, prescriptions, and appointments.
+
+4. **Run the development server**:
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
-4. **Open in browser**:
+5. **Open in browser**:
    - Navigate to `http://localhost:3000`
    - Select a role and login with demo credentials
 
@@ -168,21 +181,21 @@ See [ANALYTICS_DASHBOARD_IMPLEMENTATION.md](./ANALYTICS_DASHBOARD_IMPLEMENTATION
 
 ## Future Enhancements
 
-- Real backend integration with PostgreSQL/MongoDB
-- Gemini API integration for actual AI suggestions
+- **Security**: Implement password hashing (bcrypt) - currently using plain text for demo
 - File upload for medical documents
 - Email notifications for appointments
 - Video consultation integration
 - Insurance integration
 - Mobile app
 - Advanced analytics and reporting
+- Export medical records to PDF
 
 ## Notes
 
-- This is a demo application with client-side data storage
-- Data is stored in localStorage and persists only in the browser
-- For production use, integrate with a real backend and database
+- This application uses MongoDB for data persistence
 - Demo credentials are available for testing all roles
+- **⚠️ Security Warning**: Demo uses plain text passwords. For production, implement bcrypt password hashing.
+- Run `npm run seed` to populate the database with demo data
 
 ## License
 
